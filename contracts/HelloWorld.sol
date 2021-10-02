@@ -9,7 +9,7 @@ contract HelloWorld {
         greet = string(abi.encodePacked("Hello, ",  name));
     }
 
-    function getGreet() public view returns (string memory) {
+    function getGreeting() public view returns (string memory) {
         return greet;
     }
 

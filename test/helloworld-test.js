@@ -7,13 +7,13 @@ describe("Hello World", function () {
     const helloworld = await HelloWorld.deploy("Fabricio");
     await helloworld.deployed();
 
-    expect(await helloworld.getGreet()).to.equal("Hello, Fabricio");
+    expect(await helloworld.getGreeting()).to.equal("Hello, Fabricio");
 
     const setGreetingTx = await helloworld.setGreeting("Hola, Eduardo!");
 
     // wait until the transaction is mined
     await setGreetingTx.wait();
 
-    expect(await helloworld.getGreet()).to.equal("Hola, Eduardo!");
+    expect(await helloworld.getGreeting()).to.equal("Hola, Eduardo!");
   });
 });

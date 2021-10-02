@@ -1,5 +1,8 @@
 require("@nomiclabs/hardhat-waffle");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
@@ -18,4 +21,37 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 module.exports = {
   solidity: "0.8.4",
+
+  networks: {
+
+    ganacheUI: {
+      url: "http://127.0.0.1:7545",
+      chainId: 5777,
+      from: `${process.env.FROM_ADDRESS_LOCAL}`,
+      gas: "auto",
+      gasPrice: "auto",
+      loggingEnabled: "false",
+      accounts: [`${process.env.PRIVATE_KEY_LOCAL}`]
+    },
+    
+    ropsten: {
+      url: `${process.env.INFURA_ROPSTEN_BASE_URL}${process.env.INFURA_API_KEY}`,
+      chainId: 3,
+      from: `${process.env.FROM_ADDRESS}`,
+      gas: "auto",
+      gasPrice: "auto",
+      loggingEnabled: "false",
+      accounts: [`${process.env.PRIVATE_KEY}`]
+    },
+
+    kovan: {
+      url: `${process.env.INFURA_KOVAN_BASE_URL}${process.env.INFURA_API_KEY}`,
+      chainId: 42,
+      from: `${process.env.FROM_ADDRESS}`,
+      gas: "auto",
+      gasPrice: "auto",
+      loggingEnabled: "false",
+      accounts: [`${process.env.PRIVATE_KEY}`]
+    },
+  }
 };
