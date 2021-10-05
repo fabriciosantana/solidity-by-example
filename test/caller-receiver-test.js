@@ -1,14 +1,25 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Caller and Callee interaction", function () {
-  it("Should return updated value setted by Caller", async function () {
+describe("Caller and Receiver interaction", function () {
+  it("Should ", async function () {
 
-    const Caller = await ethers.getContractFactory("Caller2");
+    const Receiver = await ethers.getContractFactory("Receiver");
+    const receiver = await Receiver.deploy();
+    await receiver.deployed();
+
+    //console.log(await receiver.foo("hello", 10))
+
+    const Caller = await ethers.getContractFactory("Caller3");
     const caller = await Caller.deploy();
     await caller.deployed();
 
-    const Callee = await ethers.getContractFactory("Callee");
+    await caller.testCallFoo(receiver.address)
+
+    await caller.testCallDoesNotExist(receiver.address)
+
+    
+    /*const Callee = await ethers.getContractFactory("Callee");
     const callee = await Callee.deploy();
     await callee.deployed();
     
@@ -36,6 +47,7 @@ describe("Caller and Callee interaction", function () {
     //await caller.setX(callee, 25);
 
     //await caller.setXandSendEther(callee, 25);
+    */
     
   });
 });
